@@ -13,12 +13,15 @@ public class IntStreams {
 
     @Test
     public void range() throws Exception {
+
     }
 
     // Loop through people using IntStream
     @Test
     public void rangeIteratingLists() throws Exception {
         List<Person> people = MockData.getPeople();
+        IntStream.range(0, people.size());
+
     }
 
     @Test

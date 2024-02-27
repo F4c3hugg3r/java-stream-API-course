@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.OptionalDouble;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -17,11 +18,18 @@ public class TransformationsMapAndReduce {
     @Test
     void yourFirstTransformationWithMap() throws IOException {
         List<Person> people = MockData.getPeople();
+        List<PersonDTO> personDTOList = people.stream()
+                .map(person -> new PersonDTO(person.getId(), person.getFirstName(), person.getAge()))
+                .toList();
+
+        List<PersonDTO> personDTOListWithDTOMapFunction = people.stream().map(PersonDTO::map).toList();
     }
 
     @Test
     void mapToDoubleAndFindAverageCarPrice() throws IOException {
         List<Car> cars = MockData.getCars();
+        OptionalDouble averagePrice = cars.stream().mapToDouble(Car::getPrice).average();
+        System.out.println(averagePrice);
     }
 
     @Test
